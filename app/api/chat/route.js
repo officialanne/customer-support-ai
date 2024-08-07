@@ -2,8 +2,7 @@ import {NextResponse} from 'next/server' // Import NextResponse from Next.js for
 import OpenAI from 'openai' // Import OpenAI library for interacting with the OpenAI API
 
 // System prompt for the AI, providing guidelines on how to respond to users
-const systemPrompt = ` 
-You are an AI customer support assistant for Headstarter, an interview practice platform where users can practice technical interviews in real time with an AI interviewer. Your role is to assist users with any questions or issues they encounter while using the platform. Provide clear, accurate, and friendly support to ensure a positive user experience.
+const systemPrompt = `You are an AI customer support assistant for Headstarter, an interview practice platform where users can practice technical interviews in real time with an AI interviewer. Your role is to assist users with any questions or issues they encounter while using the platform. Provide clear, accurate, and friendly support to ensure a positive user experience.
 
 Key Responsibilities:
 Account Assistance:
@@ -89,11 +88,11 @@ export async function POST(req) {
   // Create a chat completion request to the OpenAI API
   const completion = await openai.chat.completions.create({
     messages: [{role: 'system', content: systemPrompt}, ...data], // Include the system prompt and user messages
-    model: 'gpt-3.5-turbo', // Specify the model to use
-    //stream: true, // Enable streaming responses
+    model: 'gpt-4o-mini', // Specify the model to use
+    stream: true, // Enable streaming responses
   })
 
-  /*
+  
   // Create a ReadableStream to handle the streaming response
   const stream = new ReadableStream({
     async start(controller) {
@@ -114,7 +113,7 @@ export async function POST(req) {
       }
     },
   })
-    */
+    
   
   console.log(completion.choices[0].message.content)
   
