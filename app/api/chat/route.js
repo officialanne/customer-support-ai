@@ -84,7 +84,6 @@ Your primary goal is to ensure that users have a seamless and productive experie
 export async function POST(req) {
   const openai = new OpenAI() // Create a new instance of the OpenAI client
   const data = await req.json() // Parse the JSON body of the incoming request
-  console.log(data)
 
   
   // Create a chat completion request to the OpenAI API
