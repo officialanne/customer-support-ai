@@ -1,9 +1,9 @@
 'use client';
 
-import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Stack, TextField, Typography, Collapse } from '@mui/material';
 import { useState, useRef, useEffect } from 'react';
 import { AccountCircle, SupportAgent } from '@mui/icons-material';
-import { useTheme } from '@mui/material/styles'; // Import useTheme
+import { useTheme } from '@mui/material/styles';
 
 export default function Home() {
   const [messages, setMessages] = useState([
@@ -15,9 +15,10 @@ export default function Home() {
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [feedback, setFeedback] = useState('');
+  const [showHelp, setShowHelp] = useState(false);
 
-  const theme = useTheme(); // Use the theme object
-  const borderColor = theme.palette.mode === 'dark' ? 'white' : 'black'; // Conditional border color
+  const theme = useTheme();
+  const borderColor = theme.palette.mode === 'dark' ? 'white' : 'black';
 
   const sendMessage = async () => {
     if (!message.trim()) return;
@@ -80,11 +81,32 @@ export default function Home() {
       justifyContent="center"
       alignItems="center"
     >
+      <Collapse in={showHelp}>
+        <Box mb={2} p={2} bgcolor="background.default" border={`1px solid ${borderColor}`}>
+          <Typography variant="h6" color="text.primary" mb={1}>
+            Help Section
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            You can ask me about:
+          </Typography>
+          <ul>
+            <li>Login issues</li>
+            <li>Password resets</li>
+            <li>Account management</li>
+            <li>Technical support</li>
+            <li>Interview preparation</li>
+            <li>Subscription and billing</li>
+            <li>General inquiries</li>
+            <li>Who I am and the purpose of Headstarter</li>
+          </ul>
+        </Box>
+      </Collapse>
+      
       <Stack
         direction="column"
         width="600px"
         height="700px"
-        border={`1px solid ${borderColor}`} // Apply border color based on theme
+        border={`1px solid ${borderColor}`}
         p={2}
         spacing={3}
         bgcolor="background.default"

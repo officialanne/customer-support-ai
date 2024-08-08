@@ -1,13 +1,14 @@
-'use client'
+'use client';
 
-import { ThemeProvider, CssBaseline } from '@mui/material';
+import { ThemeProvider, CssBaseline, Box, IconButton } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { useState, useEffect } from 'react';
-import { IconButton } from '@mui/material';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import HelpSection from './components/HelpSection'; // Import the HelpSection component
 
 // Define light and dark themes with specified colors
 const lightTheme = createTheme({
@@ -42,6 +43,7 @@ const darkTheme = createTheme({
 
 export default function RootLayout({ children }) {
   const [themeMode, setThemeMode] = useState('light');
+  const [showHelp, setShowHelp] = useState(false);
 
   useEffect(() => {
     const savedThemeMode = localStorage.getItem('themeMode');
@@ -56,6 +58,10 @@ export default function RootLayout({ children }) {
 
   const toggleTheme = () => {
     setThemeMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+  };
+
+  const toggleHelp = () => {
+    setShowHelp((prev) => !prev);
   };
 
   const theme = themeMode === 'light' ? lightTheme : darkTheme;
@@ -73,24 +79,34 @@ export default function RootLayout({ children }) {
               color: theme.palette.background.default,
               fontWeight: 'bold',
               fontSize: '24px',
+              position: 'relative',
             }}
           >
             Headstarter Support
+            <Box
+              display="flex"
+              justifyContent="flex-end"
+              alignItems="center"
+              position="absolute"
+              top={16}
+              right={16}
+              gap={1}
+            >
+              <IconButton onClick={toggleTheme} style={{ color: theme.palette.background.default }}>
+                {themeMode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
+              </IconButton>
+              <IconButton
+                onClick={toggleHelp} // Add onClick handler to toggle help section
+                style={{ color: theme.palette.background.default }}
+              >
+                <HelpOutlineIcon />
+              </IconButton>
+            </Box>
           </header>
-          <IconButton
-            onClick={toggleTheme}
-            style={{
-              position: 'fixed',
-              top: 16,
-              right: 16,
-              background: 'transparent',
-              border: 'none',
-              cursor: 'pointer',
-            }}
-          >
-            {themeMode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
-          </IconButton>
-          {children}
+          <main style={{ padding: '16px', flexGrow: 1 }}>
+            {children}
+          </main>
+          <HelpSection open={showHelp} onClose={() => setShowHelp(false)} />
         </ThemeProvider>
       </body>
     </html>
