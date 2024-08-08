@@ -99,6 +99,7 @@ export default function Home() {
         >
           HeadstarterAI Support Chatbot
         </Typography>
+        
         <Stack
           direction="column"
           spacing={2}

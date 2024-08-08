@@ -47,10 +47,17 @@ const getResponse = (message) => {
   }
 };
 
+let conversationHistory = [];
+
 export async function POST(req) {
   const data = await req.json();
   const userMessage = data[data.length - 1].content;
+
+  conversationHistory = [...conversationHistory, { role: 'user', content: userMessage }];
+
   const responseContent = getResponse(userMessage);
+
+  conversationHistory.push({ role: 'assistant', content: responseContent });
 
   const response = {
     role: 'assistant',
