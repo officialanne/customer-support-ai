@@ -82,7 +82,7 @@ export default function Home() {
           fontWeight="bold"
           padding={2}
         >
-          Headstarter Support
+          HeadstarterAI Support Chatbot
         </Typography>
         <Stack
           direction="column"
