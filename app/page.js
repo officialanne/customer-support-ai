@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Stack, TextField, Typography, Collapse } from '@mui/material';
+import { Box, Button, Stack, TextField, Typography, CircularProgress, Collapse } from '@mui/material';
 import { useState, useRef, useEffect } from 'react';
 import { AccountCircle, SupportAgent } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
@@ -80,9 +80,10 @@ export default function Home() {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
+      bgcolor={theme.palette.background.default}
     >
       <Collapse in={showHelp}>
-        <Box mb={2} p={2} bgcolor="background.default" border={`1px solid ${borderColor}`}>
+        <Box mb={2} p={2} bgcolor={theme.palette.background.paper} border={`1px solid ${borderColor}`} borderRadius={4}>
           <Typography variant="h6" color="text.primary" mb={1}>
             Help Section
           </Typography>
@@ -104,13 +105,15 @@ export default function Home() {
       
       <Stack
         direction="column"
-        width="600px"
-        height="700px"
+        width={{ xs: '90%', sm: '600px' }}
+        height={{ xs: '90vh', sm: '700px' }}
         border={`1px solid ${borderColor}`}
         p={2}
         spacing={3}
-        bgcolor="background.default"
-        color="text.primary"
+        bgcolor={theme.palette.background.paper}
+        color={theme.palette.text.primary}
+        borderRadius={4}
+        boxShadow={3}
       >
         <Typography
           variant="h6"
@@ -135,6 +138,7 @@ export default function Home() {
               display="flex"
               alignItems="center"
               justifyContent={msg.role === 'assistant' ? 'flex-start' : 'flex-end'}
+              mb={1}
             >
               <Box
                 display="flex"
@@ -145,6 +149,7 @@ export default function Home() {
                 p={2}
                 maxWidth="80%"
                 textAlign={msg.role === 'assistant' ? 'left' : 'right'}
+                boxShadow={1}
               >
                 {msg.role === 'assistant' ? <SupportAgent /> : <AccountCircle />}
                 <Box ml={1}>{msg.content}</Box>
@@ -161,13 +166,18 @@ export default function Home() {
             onChange={(e) => setMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             disabled={isLoading}
+            variant="outlined"
+            InputProps={{
+              style: { borderRadius: '16px' }
+            }}
           />
           <Button
             variant="contained"
             onClick={sendMessage}
             disabled={isLoading}
+            style={{ borderRadius: '16px' }}
           >
-            {isLoading ? 'Sending...' : 'Send'}
+            {isLoading ? <CircularProgress size={24} /> : 'Send'}
           </Button>
         </Stack>
         <Stack direction="row" spacing={2} mt={2}>
@@ -182,11 +192,16 @@ export default function Home() {
                 sendFeedback();
               }
             }}
+            variant="outlined"
+            InputProps={{
+              style: { borderRadius: '16px' }
+            }}
           />
           <Button
             variant="contained"
             onClick={sendFeedback}
             disabled={!feedback.trim()}
+            style={{ borderRadius: '16px' }}
           >
             Submit Feedback
           </Button>
