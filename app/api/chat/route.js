@@ -36,7 +36,7 @@ const getResponse = (message) => {
     return responses.who_are_you;
   } else if (message.includes('purpose')) {
     return responses.purpose;
-  } else if (message.includes('who is headstarter')) {
+  } else if (message.includes('headstarter')) {
     return responses.who_is_headstarter;
   } else if (message.includes('thank')){
     return responses.closing;

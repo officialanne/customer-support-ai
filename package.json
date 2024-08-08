@@ -15,11 +15,16 @@
     "@mui/icons-material": "^5.16.6",
     "@mui/material": "^5.16.6",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@tsparticles/react": "^3.0.0",
+    "framer-motion": "^11.3.24",
     "next": "14.2.5",
     "openai": "^4.55.1",
     "react": "^18",
     "react-dom": "^18",
-    "styled-components": "^6.1.12"
+    "react-particles": "^2.12.2",
+    "react-tsparticles": "^2.12.2",
+    "styled-components": "^6.1.12",
+    "tsparticles": "^3.5.0"
   },
   "devDependencies": {
     "eslint": "^8",
