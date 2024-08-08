@@ -14,6 +14,7 @@ export default function Home() {
   ]);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [feedback, setFeedback] = useState('');
 
   const theme = useTheme(); // Use the theme object
   const borderColor = theme.palette.mode === 'dark' ? 'white' : 'black'; // Conditional border color
@@ -37,6 +38,20 @@ export default function Home() {
     const data = await response.json();
     setMessages((prevMessages) => [...prevMessages, data]);
     setIsLoading(false);
+  };
+
+  const sendFeedback = async () => {
+    if (!feedback.trim()) return;
+
+    await fetch('/api/feedback', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ feedback: feedback.trim() }),
+    });
+
+    setFeedback('');
   };
 
   const handleKeyPress = (event) => {
@@ -130,6 +145,27 @@ export default function Home() {
             disabled={isLoading}
           >
             {isLoading ? 'Sending...' : 'Send'}
+          </Button>
+        </Stack>
+        <Stack direction="row" spacing={2} mt={2}>
+          <TextField
+            label="Feedback"
+            fullWidth
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                sendFeedback();
+              }
+            }}
+          />
+          <Button
+            variant="contained"
+            onClick={sendFeedback}
+            disabled={!feedback.trim()}
+          >
+            Submit Feedback
           </Button>
         </Stack>
       </Stack>
