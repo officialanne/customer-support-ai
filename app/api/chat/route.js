@@ -12,7 +12,7 @@ const responses = {
   who_are_you: "I am an AI customer support assistant for Headstarter. My role is to help users with any questions or issues they encounter while using the Headstarter platform.",
   purpose: "My purpose is to assist you with account management, technical support, interview preparation, and any questions regarding subscriptions and billing on the Headstarter platform.",
   who_is_headstarter: "Headstarter is an interview practice platform where users can practice technical interviews in real-time with an AI interviewer. Our goal is to help you prepare effectively for technical interviews and improve your skills.",
-  closing: "I'm always happy to help! Please let me know if you need any more assistance.",
+  closing: "I'm always happy to help! Below you can rate your experience out of 5 and give your feedback. Please let me know if you need any more assistance.",
   default: "I'm here to help! Please provide more details about your issue so I can assist you better.",
 };
 
